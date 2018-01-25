@@ -144,6 +144,19 @@ class DBDesigner extends Plugin {
 
 		switch ($plugin_functions_parameters['section']) {
 			case 'schema':
+
+				// Only show ER diagrams for databases
+				// where the user is the owner.
+				$store = $misc->getDatabaseAccessor($_REQUEST['database']);
+				$server_info = $misc->getServerInfo();
+				$rs = $store->selectSet('SELECT d.datname as "Name",
+					pg_catalog.pg_get_userbyid(d.datdba) as "Owner"
+					FROM pg_catalog.pg_database d
+					WHERE d.datname = \''.$_REQUEST['database'].'\'
+					ORDER BY 1;');
+				if ($rs->fields['Name'] != $server_info['username'])
+					break;
+
 				$tabs['default_action'] = array (
 					'title' => $this->_('strerdiagrams'),
 					'url' => 'plugin.php',
