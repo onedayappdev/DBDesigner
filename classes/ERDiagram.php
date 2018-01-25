@@ -30,7 +30,7 @@
 		public $owner_name;
 		public $owner;
 		protected $errors;
-		
+
 
 		/* Constructor */
 		public function __construct() {
@@ -48,33 +48,33 @@
 			$this->owner_name = $server_info['username'];
 			$this->owner = ERDiagram::get_object_oid('role', $this->owner_name);
 		}
-		
+
 		public static function load_from_request(){
 			$diagram = NULL;
-			
+
 			if(!isset($_POST['diagram']) && isset($_GET['erdiagram_id'])){
 				$diagram = ERDiagram::load($_GET['erdiagram_id']);
 			}
-			
+
 			else{
 				$diagram = new ERDiagram();
-				
+
 				if (isset($_POST['diagram']['id'])) $diagram->id = (int)$_POST['diagram']['id'];
-		
+
 				if (isset($_POST['diagram']['name'])) $diagram->name = trim($_POST['diagram']['name']);
 
-				if (isset($_POST['diagram']['granted_groups'])) 
+				if (isset($_POST['diagram']['granted_groups']))
 					$diagram->roles_with_privileges = array_merge($diagram->roles_with_privileges, $_POST['diagram']['granted_groups']);
 
-				if (isset($_POST['diagram']['granted_users'])) 
+				if (isset($_POST['diagram']['granted_users']))
 					$diagram->roles_with_privileges = array_merge($diagram->roles_with_privileges, $_POST['diagram']['granted_users']);
 
-				if (isset($_POST['diagram']['comment'])) $diagram->comment = trim($_POST['diagram']['comment']);	
+				if (isset($_POST['diagram']['comment'])) $diagram->comment = trim($_POST['diagram']['comment']);
 			}
-			
+
 			return $diagram;
 		}
-		
+
 		public static function setup_drivers($database, $schema, $table){
 			if(ERDiagram::$setup) { return TRUE; }
 			global $misc;
@@ -327,7 +327,7 @@
 			return ERDiagram::$store_driver->delete(ERDiagram::$store_table, $filters);
 		}
 
-		public static function load_current_schema() {		 
+		public static function load_current_schema() {
 			$schema_oid = ERDiagram::get_object_oid('schema');
 			$sql =	'SELECT "table"."oid" AS "tableOID", "table"."relname" AS "tableName", COALESCE("pg_catalog"."obj_description"("table"."oid", \'pg_class\'), \'\') AS "tableComment", NOT "table"."relhasoids" AS "tableWithoutOIDS",
 					"column"."attnum" AS "columnNum", "column"."attname" AS "columnName", "column"."attnotnull" AS "columnNotNull", COALESCE("columnDef"."adsrc", \'\') AS "columnDefaultDef", COALESCE("pg_catalog"."col_description"("column"."attrelid", "column"."attnum"), \'\') AS "columnComment", UPPER("pg_catalog"."format_type"("column"."atttypid", "column"."atttypmod")) as "columnType"
@@ -402,7 +402,7 @@
 							foreach($conkey as $i => $key) {
 								$constraint->columns[] = array(
 									'localColumn' => $indexed_columns[$table_oid][(int)$key]->name,
-									'foreignColumn' => $indexed_columns[$ftableOID][(int)$confkey[$i]]->name 
+									'foreignColumn' => $indexed_columns[$ftableOID][(int)$confkey[$i]]->name
 								);
 							}
 							$constraint->deleteAction = $rs->fields['confdeltype'];
@@ -434,7 +434,7 @@
 		}
 
 		public function get_structure(){
-			if(empty($this->data)){ return 'null'; } 
+			if(empty($this->data)){ return 'null'; }
 			return $this->data;
 		}
 

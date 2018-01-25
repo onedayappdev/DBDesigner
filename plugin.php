@@ -22,14 +22,14 @@ class DBDesigner extends Plugin {
 		parent::__construct($language);
 		if(isset($_REQUEST['plugin']) && $_REQUEST['plugin'] == $this->name && (!isset($_REQUEST['action']) || empty($_REQUEST['action']))){
 			//Set default action in case of empty action
-			$_REQUEST['action'] = 'default_action';				
+			$_REQUEST['action'] = 'default_action';
 		}
 	}
 
 	/**
 	 * Helper lang function. If the string requested is not declared within plugin's language,
 	 * it tries to get it from the global language. If the two attempts fail, it returns a warning string
-	 * 
+	 *
 	 * @global type $lang
 	 * @param type $langkey
 	 * @return string
@@ -62,7 +62,7 @@ class DBDesigner extends Plugin {
 	 * Checks that the plugin's database has been created, otherwise it prints a message
 	 * @global type $misc
 	 */
-	function connect_or_redirect(){	
+	function connect_or_redirect(){
 		if(!$this->connect()) {
 			$this->redirect_action('default_action');
 		}
@@ -72,7 +72,7 @@ class DBDesigner extends Plugin {
 	 * Checks that the plugin's database has been created, otherwise it prints a message
 	 * @global type $misc
 	 */
-	function connect(){	
+	function connect(){
 		return ERDiagram::setup_drivers(
 			$this->conf['database'],
 			$this->conf['schema'],
@@ -161,10 +161,10 @@ class DBDesigner extends Plugin {
 					'title' => $this->_('strerdiagrams'),
 					'url' => 'plugin.php',
 					'urlvars' => array(
-						'subject' => 'server', 
+						'subject' => 'server',
 						'database' => $_REQUEST['database'],
 						'schema' => $_REQUEST['schema'],
-						'action' => 'default_action', 
+						'action' => 'default_action',
 						'plugin' => $this->name),
 					'hide' => false,
 					'icon' => $this->icon('ERDiagrams')
@@ -287,14 +287,14 @@ class DBDesigner extends Plugin {
 					'href' => array (
 						'url' => 'plugin.php',
 						'urlvars' => array (
-							'plugin' => $this->name, 
+							'plugin' => $this->name,
 							'server' => field('server'),
 							'database' => field('database'),
 							'schema' => field('schema'),
 							'action' => 'create')
 					)
 				),
-				'content' => $this->_('strcreateerdiagram') 
+				'content' => $this->_('strcreateerdiagram')
 			)
 		);
 		$misc->printNavLinks($navlinks, 'dbdesigner-dbdesigner');
@@ -576,7 +576,7 @@ class DBDesigner extends Plugin {
 					'href' => array (
 						'url' => 'plugin.php',
 						'urlvars' => array (
-							'plugin' => $this->name, 
+							'plugin' => $this->name,
 							'server' => field('server'),
 							'database' => field('database'),
 							'schema' => field('schema'),
@@ -585,14 +585,14 @@ class DBDesigner extends Plugin {
 						)
 					)
 				),
-				'content' => $this->_('stredit') 
+				'content' => $this->_('stredit')
 			),
 			array (
 				'attr'=> array (
 					'href' => array (
 						'url' => 'plugin.php',
 						'urlvars' => array (
-							'plugin' => $this->name, 
+							'plugin' => $this->name,
 							'server' => field('server'),
 							'database' => field('database'),
 							'schema' => field('schema'),
@@ -602,14 +602,14 @@ class DBDesigner extends Plugin {
 						)
 					)
 				),
-				'content' => $this->_('strdrop') 
+				'content' => $this->_('strdrop')
 			),
 			array (
 				'attr'=> array (
 					'href' => array (
 						'url' => 'plugin.php',
 						'urlvars' => array (
-							'plugin' => $this->name, 
+							'plugin' => $this->name,
 							'server' => field('server'),
 							'database' => field('database'),
 							'schema' => field('schema'),
@@ -618,7 +618,7 @@ class DBDesigner extends Plugin {
 						)
 					)
 				),
-				'content' => $this->_('stropen') 
+				'content' => $this->_('stropen')
 			),
 			array (
 				'attr'=> array (
@@ -626,7 +626,7 @@ class DBDesigner extends Plugin {
 					'href' => array (
 						'url' => 'plugin.php',
 						'urlvars' => array (
-							'plugin' => $this->name, 
+							'plugin' => $this->name,
 							'server' => field('server'),
 							'database' => field('database'),
 							'schema' => field('schema'),
@@ -635,7 +635,7 @@ class DBDesigner extends Plugin {
 						)
 					)
 				),
-				'content' => $this->_('stropeninnewtab') 
+				'content' => $this->_('stropeninnewtab')
 			),
 		);
 		$misc->printNavLinks($navlinks, 'dbdesigner-dbdesigner');
@@ -675,7 +675,7 @@ class DBDesigner extends Plugin {
 		global $misc;
 		if(isset($_POST['cancel'])) { $this->redirect_action('default_action'); }
 		$this->connect_or_redirect();
-		
+
 		if(isset($_POST['erdiagram_id'])) {
 			if(is_array($_POST['erdiagram_id'])) {
 				$id_list = $_POST['erdiagram_id'];
@@ -696,7 +696,7 @@ class DBDesigner extends Plugin {
 			}
 			$this->redirect_action('default_action');
 		}
-		
+
 		if (empty($_REQUEST['erdiagram_id']) && empty($_REQUEST['ma'])) {
 			$this->add_message($this->_('strspecifyerdiagramtodrop'));
 			$this->redirect_action('default_action');
@@ -739,7 +739,7 @@ class DBDesigner extends Plugin {
 
 
 	}
-	
+
 	function open(){
 		global $misc, $_no_bottom_link, $data;
 		$scripts = '';
@@ -845,10 +845,10 @@ class DBDesigner extends Plugin {
 			'strproperties',
 			'stralter',
 			'strcolneedsname',
-			'strcolumns',	
-			'strreferences',		
-			'strconfdroptable',	
-			'strconfdropcolumn',	
+			'strcolumns',
+			'strreferences',
+			'strconfdroptable',
+			'strconfdropcolumn',
 			'strlogin',
 			'strfkneedscols',
 			'strdelete',
@@ -997,11 +997,11 @@ class DBDesigner extends Plugin {
 			$_SESSION[$this->name.'.'.'flash_message'][] = $msg;
 		}
 	}
-	
+
 	protected function set_update_tree() {
 		$_SESSION[$this->name.'.'.'update_tree'] = TRUE;
 	}
-	
+
 	protected function update_tree() {
 		if(isset($_SESSION[$this->name.'.'.'update_tree'])) {
 			unset($_SESSION[$this->name.'.'.'update_tree']);
