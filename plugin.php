@@ -137,7 +137,8 @@ class DBDesigner extends Plugin {
 	 * Add plugin in the tabs
 	 * @param $plugin_functions_parameters
 	 */
-	function add_plugin_tabs(&$plugin_functions_parameters) {
+	function add_plugin_tabs($plugin_functions_parameters) {
+		global $misc;
 
 		$tabs = &$plugin_functions_parameters['tabs'];
 
