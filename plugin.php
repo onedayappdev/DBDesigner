@@ -154,7 +154,7 @@ class DBDesigner extends Plugin {
 					FROM pg_catalog.pg_database d
 					WHERE d.datname = \''.$_REQUEST['database'].'\'
 					ORDER BY 1;');
-				if ($rs->fields['Name'] != $server_info['username'])
+				if ($rs->fields['Owner'] != $server_info['username'])
 					break;
 
 				$tabs['default_action'] = array (
