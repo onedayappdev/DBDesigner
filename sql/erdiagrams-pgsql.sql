@@ -1,12 +1,5 @@
 -- SQL script to create ER diagrams database for PostgreSQL
 
-
--- Create database
-CREATE DATABASE phppgadmin;
-
--- Connect to the database created
-\connect phppgadmin
-
 -- Create a schema to be used just by this plugin
 CREATE SCHEMA dbdsgnr;
 
